@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aksi Laut - Crowdfunding & Aksi Penanaman Mangrove Pemuda Tangsel</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0B192C',
+                            ocean: '#1E5128',
+                            leaf: '#4E9F3D',
+                            lightgreen: '#D8E9A8',
+                            sky: '#0284C7',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4e9f3d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-leaf to-brand-sky flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-leaf/20">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-2xl tracking-tight bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent">AKSI LAUT</span>
+                        <p class="text-[9px] text-slate-400 uppercase tracking-widest font-bold -mt-1">KPPL Tangerang Selatan</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#tentang" class="text-slate-300 hover:text-brand-leaf font-medium transition-colors">Tentang Kami</a>
+                    <a href="#mengapa" class="text-slate-300 hover:text-brand-leaf font-medium transition-colors">Urgensi Mangrove</a>
+                    <a href="#crowdfunding" class="text-slate-300 hover:text-brand-leaf font-medium transition-colors">Donasi</a>
+                    <a href="#kebun-virtual" class="text-slate-300 hover:text-brand-leaf font-medium transition-colors">Kebun Virtual</a>
+                    <a href="#relawan" class="text-slate-300 hover:text-brand-leaf font-medium transition-colors">Relawan</a>
+                </div>
+
+                <!-- Desktop CTA -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#crowdfunding" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-leaf to-emerald-600 hover:from-emerald-500 hover:to-brand-leaf text-white font-semibold transition-all duration-300 shadow-md shadow-emerald-900/30 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#tentang" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 font-medium transition-colors">Tentang Kami</a>
+            <a href="#mengapa" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 font-medium transition-colors">Urgensi Mangrove</a>
+            <a href="#crowdfunding" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 font-medium transition-colors">Donasi</a>
+            <a href="#kebun-virtual" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 font-medium transition-colors">Kebun Virtual</a>
+            <a href="#relawan" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 font-medium transition-colors">Relawan</a>
+            <a href="#crowdfunding" onclick="toggleMobileMenu()" class="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-brand-leaf to-emerald-600 text-white font-bold shadow-lg shadow-emerald-900/20">
+                <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-24 lg:pt-40 lg:pb-36 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950/40 via-slate-900 to-slate-950">
+        <!-- Floating Eco Elements -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-10 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1.5s"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span>
+                        Aksi Pemuda Tangerang Selatan
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white">
+                        Satu Bibit Mangrove,<br>
+                        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent">Sejuta Nafas Kehidupan</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0">
+                        Inisiatif restorasi pesisir oleh pemuda Tangerang Selatan. Mari berdonasi menanam mangrove di pesisir Banten guna mencegah abrasi, menyerap karbon, dan membangun benteng pertahanan alami untuk warga pesisir.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <a href="#crowdfunding" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-leaf via-emerald-500 to-teal-500 text-white font-bold shadow-xl shadow-emerald-500/20 transform hover:-translate-y-1 transition-all duration-300 text-center">
+                            Ikut Berdonasi <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#relawan" class="px-8 py-4 rounded-2xl bg-slate-800 border border-slate-700 text-slate-200 hover:text-white hover:bg-slate-700/80 font-bold transform hover:-translate-y-1 transition-all duration-300 text-center">
+                            Gabung Relawan <i class="fa-solid fa-users ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust Signals / Rapid Stats -->
+                    <div class="grid grid-cols-3 gap-4 pt-10 border-t border-slate-800 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <p class="text-3xl font-extrabold text-emerald-400" id="stat-pohon">3.412</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Pohon Tertanam</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-extrabold text-sky-400" id="stat-donatur">248</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Donatur Aktif</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-extrabold text-teal-400" id="stat-co2">51.1 ton</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">CO₂ Terserap / Thn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Dynamic Interactive Visual -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-[380px] sm:max-w-[450px]">
+                        <!-- Decorative glow -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-leaf to-sky-400 rounded-3xl blur-2xl opacity-25"></div>
+                        <!-- Hero Card Preview -->
+                        <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-2xl overflow-hidden backdrop-blur-sm">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Penanaman Mangrove" class="w-full h-48 sm:h-56 object-cover rounded-2xl mb-6 shadow-inner" onerror="this.src='https://placehold.co/600x400/0B192C/FFFFFF?text=Aksi+Mangrove'">
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-emerald-400 tracking-wider bg-emerald-500/10 px-3 py-1 rounded-full uppercase">Target Terdekat</span>
+                                    <span class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>Pesisir Tanjung Pasir</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Adopsi 5.000 Mangrove</h3>
+                                <p class="text-sm text-slate-400 line-clamp-2">Sinergi KPPL Tangsel mengembalikan ekosistem pesisir utara Banten yang tergerus abrasi laut yang parah.</p>
+                                
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs font-medium text-slate-300">
+                                        <span>Terkumpul: <strong class="text-emerald-400" id="hero-progress-text">Rp 51.180.000</strong></span>
+                                        <span id="hero-progress-pct">68%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-brand-leaf to-sky-400 h-2.5 rounded-full transition-all duration-1000" id="hero-progress-bar" style="width: 68.2%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[10px] text-slate-400">
+                                        <span>Target: Rp 75.000.000</span>
+                                        <span>Sisa: 12 Hari Lagi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Community Section -->
+    <section id="tentang" class="py-20 border-t border-slate-800 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold text-brand-leaf uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">Tentang Aksi Laut</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Komunitas Pemuda Peduli Laut (KPPL) Tangerang Selatan</h2>
+                <p class="text-slate-400 text-lg">Meskipun secara administratif wilayah Tangerang Selatan bukan garis pantai langsung, kepedulian kami sebagai agen perubahan menggerakkan kami langsung ke area pesisir terdekat yang sangat rentan kerusakan lingkungan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-8 hover:border-brand-leaf/40 hover:bg-slate-800/60 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-brand-leaf flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Misi Sosial Berkelanjutan</h3>
+                    <p class="text-slate-400 leading-relaxed">Melakukan restorasi ekosistem pesisir terdekat secara terarah, berkolaborasi dengan warga lokal untuk menjaga kelestarian bibit pasca-tanam.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-8 hover:border-brand-leaf/40 hover:bg-slate-800/60 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Pemberdayaan Pemuda</h3>
+                    <p class="text-slate-400 leading-relaxed">Mewadahi mahasiswa, pelajar, dan pemuda Tangsel untuk menyalurkan energi positif mereka ke dalam kegiatan kerelawanan nyata.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-8 hover:border-brand-leaf/40 hover:bg-slate-800/60 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Transparansi Digital</h3>
+                    <p class="text-slate-400 leading-relaxed">Menjamin setiap rupiah donasi yang masuk dialokasikan 100% untuk bibit mangrove berkualitas dan perawatan oleh warga lokal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Section -->
+    <section id="mengapa" class="py-20 bg-slate-950/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Visual Left -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">Edukasi Mangrove</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Mengapa Penyelamatan Pesisir Kita Harus Dimulai dari Mangrove?</h2>
+                    <p class="text-slate-400 leading-relaxed">Mangrove bukan sekadar sekumpulan pohon di air payau. Mereka adalah pahlawan super lingkungan tanpa tanda jasa yang melindungi daratan Indonesia dari kehancuran iklim.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800">
+                            <span class="text-emerald-400 text-xl font-bold p-1"><i class="fa-solid fa-shield-halved"></i></span>
+                            <div>
+                                <h4 class="font-bold text-white">Benteng Alami Abrasi</h4>
+                                <p class="text-sm text-slate-400 mt-1">Sistem akar mangrove yang kompleks mampu memecah kekuatan ombak ekstrem dan mengurangi erosi tanah pesisir hingga 66%.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800">
+                            <span class="text-sky-400 text-xl font-bold p-1"><i class="fa-solid fa-cloud-sun"></i></span>
+                            <div>
+                                <h4 class="font-bold text-white">Penangkap Karbon Efektif (Blue Carbon)</h4>
+                                <p class="text-sm text-slate-400 mt-1">Hutan mangrove menyerap gas rumah kaca (CO₂) 4 kali lebih tinggi dibandingkan hutan hujan tropis biasa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Right: Clickable Mangrove Info Model -->
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-seedling text-emerald-400"></i> Eksplorasi Bagian & Manfaat Mangrove
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-6">Klik pada bagian struktur mangrove di bawah ini untuk mempelajari fungsinya secara interaktif:</p>
+                        
+                        <!-- Interactivity Box -->
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                            <!-- Diagram Buttons -->
+                            <div class="sm:col-span-6 space-y-3">
+                                <button onclick="selectMangrovePart('daun')" id="btn-daun" class="mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-semibold transition-all duration-300 hover:bg-emerald-500/20 flex items-center justify-between">
+                                    <span>Daun & Respirasi</span>
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                                <button onclick="selectMangrovePart('batang')" id="btn-batang" class="mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-800/50 text-slate-300 font-semibold transition-all duration-300 hover:bg-slate-800 flex items-center justify-between">
+                                    <span>Batang & Struktur Serat</span>
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                                <button onclick="selectMangrovePart('akar')" id="btn-akar" class="mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-800/50 text-slate-300 font-semibold transition-all duration-300 hover:bg-slate-800 flex items-center justify-between">
+                                    <span>Akar Napas (Pneumatofor)</span>
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                                <button onclick="selectMangrovePart('buah')" id="btn-buah" class="mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-800/50 text-slate-300 font-semibold transition-all duration-300 hover:bg-slate-800 flex items-center justify-between">
+                                    <span>Propagul (Buah/Kecambah)</span>
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+
+                            <!-- Explanation display -->
+                            <div class="sm:col-span-6 bg-slate-950 border border-slate-800/80 rounded-2xl p-6 min-h-[220px] flex flex-col justify-between">
+                                <div id="mangrove-explanation-content">
+                                    <h4 class="font-bold text-emerald-400 text-lg mb-2" id="expl-title">Daun & Respirasi</h4>
+                                    <p class="text-sm text-slate-400 leading-relaxed" id="expl-desc">Daun mangrove memiliki kelenjar khusus untuk mengeluarkan kelebihan garam yang diserap dari air laut. Proses fotosintesisnya sangat efisien dalam menyerap CO₂ udara dan melepas O₂ segar.</p>
+                                </div>
+                                <div class="pt-4 border-t border-slate-900 text-xs text-brand-leaf font-medium flex items-center gap-1.5 mt-4" id="expl-funfact">
+                                    <i class="fa-solid fa-circle-info"></i> Fun Fact: Beberapa spesies menggugurkan daun tua untuk membuang garam!
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crowdfunding & Donation Campaign Section -->
+    <section id="crowdfunding" class="py-20 bg-slate-900 border-t border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full">Galang Dana Aktif</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Gerakan Adopsi Bibit Mangrove</h2>
+                <p class="text-slate-400">Setiap Rp 15.000,- yang Anda donasikan setara dengan adopsi 1 bibit mangrove, biaya penanaman, serta pemantauan pertumbuhan selama 1 tahun penuh.</p>
+            </div>
+
+            <!-- Campaign Box Split Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Donation Box Left (Form) -->
+                <div class="lg:col-span-7 bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-heart-pulse text-rose-500 animate-pulse"></i> Formulir Donasi Cepat
+                    </h3>
+                    
+                    <!-- Predefined Tree Quantities -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-3">Pilih Jumlah Pohon untuk Diadopsi:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button type="button" onclick="selectPresetDonation(5)" class="donation-preset-btn p-3 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-leaf text-slate-200 hover:text-white font-bold transition-all duration-200 text-center" id="preset-5">
+                                5 Pohon
+                                <span class="block text-[10px] text-slate-400 font-normal">Rp 75k</span>
+                            </button>
+                            <button type="button" onclick="selectPresetDonation(10)" class="donation-preset-btn p-3 rounded-xl border border-brand-leaf bg-emerald-500/10 text-brand-leaf font-bold transition-all duration-200 text-center" id="preset-10">
+                                10 Pohon
+                                <span class="block text-[10px] text-emerald-400 font-normal">Rp 150k</span>
+                            </button>
+                            <button type="button" onclick="selectPresetDonation(25)" class="donation-preset-btn p-3 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-leaf text-slate-200 hover:text-white font-bold transition-all duration-200 text-center" id="preset-25">
+                                25 Pohon
+                                <span class="block text-[10px] text-slate-400 font-normal">Rp 375k</span>
+                            </button>
+                            <button type="button" onclick="selectPresetDonation(100)" class="donation-preset-btn p-3 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-leaf text-slate-200 hover:text-white font-bold transition-all duration-200 text-center" id="preset-100">
+                                100 Pohon
+                                <span class="block text-[10px] text-slate-400 font-normal">Rp 1.5M</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Custom input / Calculator -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="custom-tree-count" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Jumlah Pohon Kustom</label>
+                            <div class="relative">
+                                <input type="number" id="custom-tree-count" oninput="calculateCustomDonation()" min="1" max="10000" value="10" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white font-bold focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf">
+                                <span class="absolute right-4 top-3 text-slate-500 font-medium text-sm">Pohon</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Donasi Anda</label>
+                            <div class="relative bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 flex items-center h-[46px] sm:h-[50px]">
+                                <span class="text-emerald-400 font-bold" id="total-donation-display">Rp 150.000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="donor-name" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nama Donatur</label>
+                            <input type="text" id="donor-name" placeholder="Contoh: Budi Santoso" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                        </div>
+                        <div>
+                            <label for="donor-email" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email (Opsional)</label>
+                            <input type="email" id="donor-email" placeholder="budi@email.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="donor-message" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Pesan Dukungan (Opsional)</label>
+                        <textarea id="donor-message" rows="2" placeholder="Tuliskan harapan Anda untuk aksi pesisir ini..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium resize-none"></textarea>
+                    </div>
+
+                    <!-- Payment Simulator Select -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Metode Pembayaran (Simulasi)</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <label class="payment-method-card relative flex items-center justify-center p-3 rounded-xl border border-brand-leaf bg-emerald-500/5 cursor-pointer hover:border-brand-leaf">
+                                <input type="radio" name="payment_method" value="qris" checked class="absolute opacity-0">
+                                <div class="text-center">
+                                    <span class="block font-bold text-white text-xs">QRIS</span>
+                                    <span class="text-[9px] text-emerald-400">Instan</span>
+                                </div>
+                            </label>
+                            <label class="payment-method-card relative flex items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-900 cursor-pointer hover:border-slate-800">
+                                <input type="radio" name="payment_method" value="gopay" class="absolute opacity-0">
+                                <div class="text-center">
+                                    <span class="block font-bold text-slate-300 text-xs">Gopay/OVO</span>
+                                    <span class="text-[9px] text-slate-500">E-Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-method-card relative flex items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-900 cursor-pointer hover:border-slate-800">
+                                <input type="radio" name="payment_method" value="bca" class="absolute opacity-0">
+                                <div class="text-center">
+                                    <span class="block font-bold text-slate-300 text-xs">BCA Transfer</span>
+                                    <span class="text-[9px] text-slate-500">Virtual Acc</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="button" onclick="processDonation()" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-leaf via-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-brand-leaf text-white font-extrabold shadow-xl shadow-brand-leaf/20 transform hover:-translate-y-0.5 transition-all duration-300 tracking-wider">
+                        KIRIM DONASI SEKARANG <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                    
+                    <p class="text-[11px] text-center text-slate-500"><i class="fa-solid fa-shield-halved mr-1"></i> Donasi simulasi terintegrasi. Uang nyata tidak akan ditarik.</p>
+                </div>
+
+                <!-- Live Feed & Progress Right -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Impact Meter Live -->
+                    <div class="bg-gradient-to-br from-emerald-950/50 to-slate-950 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <h4 class="font-bold text-white text-sm uppercase tracking-wider text-slate-400"><i class="fa-solid fa-chart-pie mr-2 text-brand-leaf"></i>Dampak Kumulatif Saat Ini</h4>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800/80">
+                                <p class="text-slate-400 text-xs font-semibold">Total Dana Terkumpul</p>
+                                <p class="text-2xl font-black text-white mt-1" id="total-raised">Rp 51.180.000</p>
+                                <span class="text-[10px] text-emerald-400 font-bold"><i class="fa-solid fa-arrow-trend-up"></i> +14% minggu ini</span>
+                            </div>
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800/80">
+                                <p class="text-slate-400 text-xs font-semibold">Total Bibit Tersedia</p>
+                                <p class="text-2xl font-black text-white mt-1" id="total-planted">3.412</p>
+                                <span class="text-[10px] text-slate-400">Target kampanye: 5.000</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Mini progress representation -->
+                        <div class="space-y-2 pt-2">
+                            <div class="flex justify-between text-xs font-bold text-slate-300">
+                                <span>Kemajuan Restorasi</span>
+                                <span id="progress-percent-calc">68.24%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+                                <div id="live-progress-bar-inner" class="bg-gradient-to-r from-brand-leaf to-sky-400 h-3 rounded-full transition-all duration-1000" style="width: 68.24%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Heroes Wall -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-white text-sm uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                <i class="fa-solid fa-ribbon text-emerald-400 animate-bounce"></i> Donatur Terbaru
+                            </h4>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">REALTIME</span>
+                        </div>
+                        
+                        <div class="space-y-3 max-h-[280px] overflow-y-auto custom-scrollbar pr-1" id="donors-list">
+                            <!-- JS will populate or we can put initial mockup -->
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                                        AN
+                                    </div>
+                                    <div>
+                                        <h5 class="text-sm font-bold text-white">Ananda N.</h5>
+                                        <p class="text-[10px] text-slate-500">"Semoga mangrovenya tumbuh subur & bermanfaat!"</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-400">20 Pohon</span>
+                                    <p class="text-[9px] text-slate-500">2 jam yang lalu</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                                        R
+                                    </div>
+                                    <div>
+                                        <h5 class="text-sm font-bold text-white">Rizky S.</h5>
+                                        <p class="text-[10px] text-slate-500">"Sore ini donasi, lusa ikut nanam!"</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-400">10 Pohon</span>
+                                    <p class="text-[9px] text-slate-500">5 jam yang lalu</p>
+                                </div>
+                            </div>
+
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                                        KA
+                                    </div>
+                                    <div>
+                                        <h5 class="text-sm font-bold text-white">Komunitas Alam Tangsel</h5>
+                                        <p class="text-[10px] text-slate-500">"Kolaborasi luar biasa dari pemuda!"</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-emerald-400">150 Pohon</span>
+                                    <p class="text-[9px] text-slate-500">1 hari yang lalu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Kebun Mangrove Virtual Section -->
+    <section id="kebun-virtual" class="py-20 bg-slate-950/90 border-t border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-xs font-bold text-brand-leaf uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">Gamifikasi & Keterlibatan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Kebun Mangrove Virtual</h2>
+                <p class="text-slate-400">Setiap bibit yang Anda donasikan akan ditanam secara virtual di sini sebelum dipindahkan ke pesisir nyata. Arahkan kursor atau klik pohon untuk melihat dedikasi nama donatur!</p>
+            </div>
+
+            <!-- Interactive Map Wrapper -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+                <!-- Map Header Info -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 pb-6 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <span class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></span>
+                        <p class="text-sm font-semibold text-slate-300">Peta Virtual: <span class="text-brand-leaf font-bold">Pesisir Banten KPPL Tangsel</span></p>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs">
+                        <span class="flex items-center gap-2 text-slate-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Mangrove Tumbuh</span>
+                        <span class="flex items-center gap-2 text-slate-400"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Bibit Baru</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Virtual Garden Area -->
+                <div class="relative w-full h-80 sm:h-96 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-center p-4">
+                    <!-- Background Water/Land Visual -->
+                    <div class="absolute inset-0 opacity-10 pointer-events-none">
+                        <div class="absolute bottom-0 w-full h-1/2 bg-blue-500 rounded-full blur-2xl"></div>
+                        <div class="absolute top-0 w-full h-1/2 bg-amber-950 rounded-full blur-2xl"></div>
+                    </div>
+
+                    <!-- Virtual Tree Grid -->
+                    <div class="grid grid-cols-6 sm:grid-cols-10 gap-3 sm:gap-4 relative z-10 w-full h-full max-h-[320px] overflow-y-auto custom-scrollbar p-2" id="virtual-garden-grid">
+                        <!-- Items will be generated dynamically by JS. Represented by FontAwesome plant/tree icons -->
+                    </div>
+
+                    <!-- Tooltip Display for selected Tree -->
+                    <div id="garden-tooltip" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-900/95 border border-brand-leaf/40 px-4 py-2.5 rounded-xl shadow-xl z-20 text-center pointer-events-none transition-all duration-300 opacity-0 max-w-xs">
+                        <p class="text-[10px] text-brand-leaf font-extrabold uppercase tracking-widest">Penanam Mangrove</p>
+                        <h4 class="text-sm font-bold text-white mt-0.5" id="tooltip-name">Andi Setiawan</h4>
+                        <p class="text-[11px] text-slate-400 italic mt-1" id="tooltip-msg">"Demi pesisir Tangsel bebas banjir!"</p>
+                    </div>
+                </div>
+
+                <!-- Footer tip -->
+                <div class="mt-6 text-center text-xs text-slate-500">
+                    <i class="fa-solid fa-hand-pointer mr-1"></i> Klik atau hover di atas pohon untuk mengintip dedikasi donasi.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Form Section -->
+    <section id="relawan" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Volunteer Left Info -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold text-brand-leaf uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">Aksi Lapangan</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Mari Turun Tangan, Bukan Sekadar Angkat Tangan!</h2>
+                    <p class="text-slate-400 leading-relaxed">Selain donasi finansial, aksi nyata membutuhkan tenaga pemuda. KPPL Tangerang Selatan membuka kesempatan bagi Anda untuk merasakan pengalaman berlumpur ria menanam masa depan pesisir kita.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-brand-leaf flex items-center justify-center text-sm"><i class="fa-solid fa-location-arrow"></i></span>
+                            <span class="text-sm font-medium text-slate-300">Penjemputan disediakan dari Alun-Alun Pamulang Tangsel</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-brand-leaf flex items-center justify-center text-sm"><i class="fa-solid fa-kit-medical"></i></span>
+                            <span class="text-sm font-medium text-slate-300">Peralatan, konsumsi, dan boots disediakan gratis</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-brand-leaf flex items-center justify-center text-sm"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <span class="text-sm font-medium text-slate-300">E-Sertifikat Relawan Lingkungan KPPL Banten</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Volunteer Right Form -->
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-user-plus text-emerald-400"></i> Daftar Sebagai Relawan Mangrove
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="vol-name" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nama Lengkap</label>
+                                <input type="text" id="vol-name" placeholder="Nama Anda" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                            </div>
+                            <div>
+                                <label for="vol-whatsapp" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">No. WhatsApp</label>
+                                <input type="text" id="vol-whatsapp" placeholder="08xxxxxxxxxx" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="vol-domicile" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Kecamatan Domisili (Tangsel)</label>
+                                <select id="vol-domicile" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                                    <option value="Pamulang">Pamulang</option>
+                                    <option value="Ciputat">Ciputat</option>
+                                    <option value="Ciputat Timur">Ciputat Timur</option>
+                                    <option value="Pondok Aren">Pondok Aren</option>
+                                    <option value="Serpong">Serpong</option>
+                                    <option value="Serpong Utara">Serpong Utara</option>
+                                    <option value="Setu">Setu</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="vol-role" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Peran yang Diminati</label>
+                                <select id="vol-role" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium">
+                                    <option value="Planter">Tenaga Lapangan (Penanam)</option>
+                                    <option value="Documentator">Dokumentasi (Foto & Video)</option>
+                                    <option value="Educator">Edukator Warga Sekitar</option>
+                                    <option value="Logistics">Dapur Umum / Logistik</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="vol-reason" class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Kenapa kamu ingin berkontribusi?</label>
+                            <textarea id="vol-reason" rows="2" placeholder="Bagikan motivasimu secara singkat..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm font-medium resize-none"></textarea>
+                        </div>
+
+                        <button type="button" onclick="registerVolunteer()" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-sky-600 hover:to-emerald-600 text-white font-extrabold shadow-xl shadow-sky-900/20 transform hover:-translate-y-0.5 transition-all duration-300 tracking-wider">
+                            GABUNG AKSI PENANAMAN <i class="fa-solid fa-hands-holding-child ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-slate-950/80 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-sky-400 uppercase tracking-widest bg-sky-500/10 px-3 py-1 rounded-full">Tanya Jawab</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2">Menjawab Keraguan Anda</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden transition-colors">
+                    <button onclick="toggleFAQ(1)" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Kapan aksi penanaman mangrove ini dilakukan?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300" id="faq-chevron-1"></i>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq-content-1">
+                        <p class="text-sm text-slate-400 leading-relaxed">Penanaman batch berikutnya dijadwalkan pada setiap akhir pekan kedua setiap bulan. Detail keberangkatan dari meeting point Pamulang (Tangerang Selatan) akan dikabarkan via WhatsApp H-3.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden transition-colors">
+                    <button onclick="toggleFAQ(2)" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Bagaimana cara memantau mangrove yang saya donasikan?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300" id="faq-chevron-2"></i>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq-content-2">
+                        <p class="text-sm text-slate-400 leading-relaxed">Setiap donatur akan menerima email laporan perkembangan berkala 3 bulan sekali. Laporan berisi foto real lapangan, koordinat peta geo-tagging, dan tingkat kelangsungan hidup bibit mangrove.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden transition-colors">
+                    <button onclick="toggleFAQ(3)" class="w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Apakah dana donasi ini sepenuhnya untuk pengadaan bibit?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300" id="faq-chevron-3"></i>
+                    </button>
+                    <div class="px-6 pb-6 hidden" id="faq-content-3">
+                        <p class="text-sm text-slate-400 leading-relaxed">Benar, alokasi mencakup pembelian bibit mangrove unggul, patok bambu pelindung, biaya jasa tanam/rawat warga pesisir setempat (pemberdayaan ekonomi lokal), serta transportasi pemeliharaan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Modern Alert Notification Box (Self-built Toast) -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[100] max-w-sm w-full space-y-3 pointer-events-none"></div>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                
+                <!-- Col 1 -->
+                <div class="md:col-span-4 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-leaf to-brand-sky flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <span class="font-extrabold text-2xl tracking-tight bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent">AKSI LAUT</span>
+                    </div>
+                    <p class="text-sm text-slate-500">Inisiatif kerelawanan iklim dan penggalangan dana berbasis pemuda di Tangerang Selatan untuk masa depan kelautan Indonesia.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-900 hover:bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="md:col-span-3 space-y-4">
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider">Navigasi Cepat</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#tentang" class="hover:text-emerald-400 transition-colors">Tentang KPPL Tangsel</a></li>
+                        <li><a href="#mengapa" class="hover:text-emerald-400 transition-colors">Pentingnya Mangrove</a></li>
+                        <li><a href="#crowdfunding" class="hover:text-emerald-400 transition-colors">Crowdfunding Aktif</a></li>
+                        <li><a href="#kebun-virtual" class="hover:text-emerald-400 transition-colors">Visual Kebun Virtual</a></li>
+                        <li><a href="#relawan" class="hover:text-emerald-400 transition-colors">Program Sukarelawan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="md:col-span-5 space-y-4">
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider">Berlangganan Kabar Mangrove</h4>
+                    <p class="text-sm text-slate-500">Dapatkan update terjadwal penanaman lapangan dan perkembangan riset pemuda.</p>
+                    <form onsubmit="subscribeNewsletter(event)" class="flex gap-2">
+                        <input type="email" id="news-email" required placeholder="Masukkan alamat email Anda" class="bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-brand-leaf focus:ring-1 focus:ring-brand-leaf text-sm flex-grow">
+                        <button type="submit" class="px-5 py-3 rounded-xl bg-gradient-to-r from-brand-leaf to-emerald-600 hover:from-emerald-500 hover:to-brand-leaf text-white font-semibold text-sm transition-all duration-300 shrink-0">
+                            Langganan
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-600">
+                <p>&copy; 2026 KPPL Tangerang Selatan. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Ketentuan Layanan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global State variables
+        const state = {
+            totalRaised: 51180000,
+            targetAmount: 75000000,
+            basePlanted: 3412,
+            selectedPart: 'daun',
+            selectedPresetTrees: 10,
+            treePrice: 15000,
+            recentDonors: [
+                { name: "Ananda N.", trees: 20, message: "Semoga mangrovenya tumbuh subur & bermanfaat!", initials: "AN", time: "2 jam yang lalu" },
+                { name: "Rizky S.", trees: 10, message: "Sore ini donasi, lusa ikut nanam!", initials: "R", time: "5 jam yang lalu" },
+                { name: "Komunitas Alam Tangsel", trees: 150, message: "Kolaborasi luar biasa dari pemuda!", initials: "KA", time: "1 hari yang lalu" },
+                { name: "Indra Wahyudi", trees: 5, message: "Untuk masa depan anak cucu pesisir.", initials: "IW", time: "2 hari yang lalu" },
+                { name: "Aisyah P.", trees: 30, message: "Aksi luar biasa pemuda Tangsel!", initials: "AP", time: "2 hari yang lalu" }
+            ]
+        };
+
+        // Mangrove Explanations DB
+        const mangroveParts = {
+            daun: {
+                title: "Daun & Keluar Garam",
+                desc: "Daun mangrove memiliki pori-pori dan kelenjar khusus untuk mengeluarkan kelebihan kadar garam dari air laut. Melalui fotosintesisnya, daun ini menjadi penyerap karbondioksida (CO₂) yang andal dalam ekosistem karbon biru.",
+                fact: "Fun Fact: Beberapa jenis pohon mangrove dapat berubah warna daun menjadi kuning keemasan untuk dibuang bersama garam berlebih!"
+            },
+            batang: {
+                title: "Batang & Struktur Kokoh",
+                desc: "Batang mangrove tersusun dari selulos kayu padat berkepadatan tinggi yang tahan terhadap rendaman air asin yang konstan. Kayu kokoh ini menjadi struktur tangguh pemecah energi kinetik ombak pesisir.",
+                fact: "Fun Fact: Batang mangrove sangat tahan rayap dan dapat bertahan puluhan tahun di kondisi lingkungan berlumpur basah!"
+            },
+            akar: {
+                title: "Akar Napas (Pneumatofor)",
+                desc: "Karena tanah pesisir anaerob (miskin oksigen), akar mangrove tumbuh mencuat ke atas permukaan air atau lumpur demi menghirup udara luar saat pasang surut terjadi. Akar ini juga mematangkan sedimen tanah pesisir agar tidak mudah longsor.",
+                fact: "Fun Fact: Struktur jaring akar yang kompleks di bawah air menjadi zona asuh terbaik ikan kecil, kepiting, dan udang alami!"
+            },
+            buah: {
+                title: "Propagul (Kecambah Gantung)",
+                desc: "Mangrove berkembang biak secara unik dengan mematangkan kecambah langsung di dahan induknya sebelum jatuh (vivipari). Ketika jatuh ke air laut berlumpur, kecambah berbentuk silinder runcing ini akan langsung menancap ke tanah secara instan.",
+                fact: "Fun Fact: Kecambah propagul dapat hanyut berminggu-minggu di samudera luas dan tetap hidup sampai menemukan pesisir baru!"
+            }
+        };
+
+        // Initialize state on DOM load
+        window.addEventListener('load', () => {
+            updateVisualStatistics();
+            renderDonors();
+            generateVirtualGarden();
+        });
+
+        // Toggle Responsive Navbar
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-2xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-2xl';
+            }
+        }
+
+        
+        // Interactive Mangrove Explanatory
+        function selectMangrovePart(partKey) {
+            // Update active state style on buttons
+            document.querySelectorAll('.mangrove-part-btn').forEach(btn => {
+                btn.className = "mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-800/50 text-slate-300 font-semibold transition-all duration-300 hover:bg-slate-800 flex items-center justify-between";
+            });
+
+            const activeBtn = document.getElementById(`btn-${partKey}`);
+            if (activeBtn) {
+                activeBtn.className = "mangrove-part-btn w-full text-left p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-semibold transition-all duration-300 hover:bg-emerald-500/20 flex items-center justify-between";
+            }
+
+            // Update contents
+            const part = mangroveParts[partKey];
+            document.getElementById('expl-title').innerText = part.title;
+            document.getElementById('expl-desc').innerText = part.desc;
+            document.getElementById('expl-funfact').innerHTML = `<i class="fa-solid fa-circle-info"></i> ${part.fact}`;
+        }
+
+        // Preset Donation Selections
+        function selectPresetDonation(treesCount) {
+            state.selectedPresetTrees = treesCount;
+            document.querySelectorAll('.donation-preset-btn').forEach(btn => {
+                btn.className = "donation-preset-btn p-3 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-leaf text-slate-200 hover:text-white font-bold transition-all duration-200 text-center";
+            });
+
+            const activeBtn = document.getElementById(`preset-${treesCount}`);
+            if (activeBtn) {
+                activeBtn.className = "donation-preset-btn p-3 rounded-xl border border-brand-leaf bg-emerald-500/10 text-brand-leaf font-bold transition-all duration-200 text-center";
+            }
+
+            // Sync with custom tree input and recalculate
+            document.getElementById('custom-tree-count').value = treesCount;
+            calculateCustomDonation();
+        }
+
+        // Live calculation from manual trees input
+        function calculateCustomDonation() {
+            const countInput = document.getElementById('custom-tree-count');
+            let count = parseInt(countInput.value) || 0;
+            if (count < 1) count = 1;
+            if (count > 10000) count = 10000;
+            
+            // Highlight matching preset button or clear others if none matches
+            document.querySelectorAll('.donation-preset-btn').forEach(btn => {
+                btn.className = "donation-preset-btn p-3 rounded-xl border border-slate-800 bg-slate-900 hover:border-brand-leaf text-slate-200 hover:text-white font-bold transition-all duration-200 text-center";
+            });
+            const matchBtn = document.getElementById(`preset-${count}`);
+            if (matchBtn) {
+                matchBtn.className = "donation-preset-btn p-3 rounded-xl border border-brand-leaf bg-emerald-500/10 text-brand-leaf font-bold transition-all duration-200 text-center";
+            }
+
+            const total = count * state.treePrice;
+            document.getElementById('total-donation-display').innerText = formatRupiah(total);
+        }
+
+        // Helper: Format Rupiah Currency
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        }
+
+        
+        // Custom Toast System to avoid browser native alerts
+        function showToast(title, message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgClass = type === 'success' ? 'bg-slate-900 border-emerald-500/40' : 'bg-slate-900 border-rose-500/40';
+            const iconClass = type === 'success' ? 'fa-circle-check text-emerald-400' : 'fa-circle-exclamation text-rose-500';
+            
+            toast.className = `p-4 rounded-2xl border ${bgClass} shadow-2xl flex items-start gap-3 transition-all duration-500 transform translate-y-2 opacity-0 pointer-events-auto`;
+            toast.innerHTML = `
+                <span class="text-xl mt-0.5"><i class="fa-solid ${iconClass}"></i></span>
+                <div class="flex-grow">
+                    <h5 class="text-sm font-bold text-white">${title}</h5>
+                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">${message}</p>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+            
+            // Remove after 6 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 6000);
+        }
+
+        // Process Donation Simulation
+        function processDonation() {
+            const nameInput = document.getElementById('donor-name');
+            const messageInput = document.getElementById('donor-message');
+            const treeInput = document.getElementById('custom-tree-count');
+            
+            const donorName = nameInput.value.trim() || "Donatur Anonim";
+            const donorMsg = messageInput.value.trim() || "Saya peduli masa depan kelautan kita!";
+            const treeCount = parseInt(treeInput.value) || 10;
+            const donationValue = treeCount * state.treePrice;
+
+            // Update stats
+            state.totalRaised += donationValue;
+            
+            // Play fireworks confetti celebration
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            // Put a small delay for simulation feeling
+            showToast(
+                "Donasi Berhasil Diproses! 🌱", 
+                `Terima kasih ${donorName}! Anda berhasil mendonasikan ${treeCount} pohon mangrove senilai ${formatRupiah(donationValue)} untuk pelestarian pesisir Banten oleh pemuda Tangsel.`
+            );
+
+            // Add new hero donor to the top of list
+            const initial = donorName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || "AN";
+            state.recentDonors.unshift({
+                name: donorName,
+                trees: treeCount,
+                message: `"${donorMsg}"`,
+                initials: initial,
+                time: "Baru saja"
+            });
+
+            // Update the UI visual statistics
+            updateVisualStatistics();
+            renderDonors();
+            
+            // Dynamically add new seedling into our virtual garden!
+            addTreeToVirtualGarden(donorName, donorMsg);
+
+            // Clear inputs
+            nameInput.value = '';
+            messageInput.value = '';
+            document.getElementById('donor-email').value = '';
+        }
+
+        // Update Stats displays
+        function updateVisualStatistics() {
+            // Calculated values
+            const totalPlanted = state.basePlanted + Math.floor((state.totalRaised - 51180000) / state.treePrice);
+            const rawProgressPct = (state.totalRaised / state.targetAmount) * 100;
+            const progressPercent = Math.min(rawProgressPct, 100).toFixed(2);
+            const totalCO2 = (totalPlanted * 15 / 1000).toFixed(1); // Formula: 1 mangrove sequester approx 15kg CO2 per year
+
+            // Update values text
+            document.getElementById('stat-pohon').innerText = totalPlanted.toLocaleString('id-ID');
+            document.getElementById('stat-co2').innerText = `${totalCO2} ton`;
+            document.getElementById('stat-donatur').innerText = (248 + Math.floor((state.totalRaised - 51180000) / 150000)).toString();
+
+            document.getElementById('total-raised').innerText = formatRupiah(state.totalRaised);
+            document.getElementById('total-planted').innerText = totalPlanted.toLocaleString('id-ID');
+            
+            document.getElementById('progress-percent-calc').innerText = `${progressPercent}%`;
+            document.getElementById('live-progress-bar-inner').style.width = `${progressPercent}%`;
+
+            // Hero components update
+            document.getElementById('hero-progress-text').innerText = formatRupiah(state.totalRaised);
+            document.getElementById('hero-progress-pct').innerText = `${progressPercent}%`;
+            document.getElementById('hero-progress-bar').style.width = `${progressPercent}%`;
+        }
+
+        // Render recent donors into list
+        function renderDonors() {
+            const listContainer = document.getElementById('donors-list');
+            listContainer.innerHTML = ''; // clear first
+
+            state.recentDonors.forEach(donor => {
+                const donorCard = document.createElement('div');
+                donorCard.className = "p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center justify-between gap-3 transition-all duration-300 hover:bg-slate-900";
+                donorCard.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                            ${donor.initials}
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white">${donor.name}</h5>
+                            <p class="text-[10px] text-slate-500 italic">${donor.message}</p>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="text-xs font-bold text-emerald-400">${donor.trees} Pohon</span>
+                        <p class="text-[9px] text-slate-500">${donor.time}</p>
+                    </div>
+                `;
+                listContainer.appendChild(donorCard);
+            });
+        }
+
+
+        // Virtual Garden Dynamics
+        const mockGardenPeople = [
+            { name: "Andi Setiawan", msg: "Mari lestarikan bumi tercinta!" },
+            { name: "Dewi Lestari", msg: "Semoga terus bertambah rimbun." },
+            { name: "Bagus Pamungkas", msg: "KPPL Tangsel mantap aksinya!" },
+            { name: "Kartika Sari", msg: "Ayo donasi selamatkan ikan hias." },
+            { name: "Fajar Nugraha", msg: "Satu pohon masa depan bumi kita." },
+            { name: "Eko Prasetyo", msg: "Tangsel peduli laut!" },
+            { name: "Sarah Amanda", msg: "Semoga duniaku terus lestari." },
+            { name: "Gita Yunita", msg: "Salam lestari para pahlawan hijau." },
+            { name: "Hendra Wijaya", msg: "Sedekah pohon masa kini." },
+            { name: "Siti Rahma", msg: "Sukses selalu KPPL Banten." }
+        ];
+
+        function generateVirtualGarden() {
+            const grid = document.getElementById('virtual-garden-grid');
+            grid.innerHTML = '';
+
+            // Generate 30 initial mockup trees
+            for (let i = 0; i < 30; i++) {
+                const randomPerson = mockGardenPeople[i % mockGardenPeople.length];
+                const isNew = i > 25; // Mark recent ones with different colors
+                
+                const tree = document.createElement('button');
+                tree.type = 'button';
+                tree.className = `p-2 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-125 focus:outline-none relative group`;
+                
+                const iconColor = isNew ? 'text-amber-400 hover:text-amber-300' : 'text-emerald-500 hover:text-emerald-400';
+                
+                tree.innerHTML = `
+                    <i class="fa-solid fa-tree text-3xl sm:text-4xl ${iconColor}"></i>
+                `;
+
+                // Hover & click listeners for tooltip display
+                tree.addEventListener('mouseenter', () => showGardenTooltip(randomPerson.name, randomPerson.msg, tree));
+                tree.addEventListener('mouseleave', hideGardenTooltip);
+                tree.addEventListener('click', () => showGardenTooltip(randomPerson.name, randomPerson.msg, tree));
+
+                grid.appendChild(tree);
+            }
+        }
+
+        function addTreeToVirtualGarden(name, msg) {
+            const grid = document.getElementById('virtual-garden-grid');
+            
+            const tree = document.createElement('button');
+            tree.type = 'button';
+            tree.className = `p-2 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-125 scale-0 focus:outline-none relative group`;
+            tree.innerHTML = `
+                <i class="fa-solid fa-tree text-3xl sm:text-4xl text-amber-400 hover:text-amber-300 animate-bounce"></i>
+            `;
+
+            tree.addEventListener('mouseenter', () => showGardenTooltip(name, msg, tree));
+            tree.addEventListener('mouseleave', hideGardenTooltip);
+            tree.addEventListener('click', () => showGardenTooltip(name, msg, tree));
+
+            // Prepend new trees so they appear on top
+            grid.insertBefore(tree, grid.firstChild);
+
+            // Pop animation scale in
+            setTimeout(() => {
+                tree.classList.remove('scale-0');
+            }, 100);
+        }
+
+        function showGardenTooltip(name, msg, element) {
+            const tooltip = document.getElementById('garden-tooltip');
+            document.getElementById('tooltip-name').innerText = name;
+            document.getElementById('tooltip-msg').innerText = `"${msg}"`;
+            
+            tooltip.classList.remove('opacity-0');
+        }
+
+        function hideGardenTooltip() {
+            const tooltip = document.getElementById('garden-tooltip');
+            tooltip.classList.add('opacity-0');
+        }
+
+        // Volunteer Registration Submission Handler
+        function registerVolunteer() {
+            const name = document.getElementById('vol-name').value.trim();
+            const wa = document.getElementById('vol-whatsapp').value.trim();
+            const dom = document.getElementById('vol-domicile').value;
+            const role = document.getElementById('vol-role').value;
+            const reason = document.getElementById('vol-reason').value.trim();
+
+            if (!name || !wa) {
+                showToast("Data Kurang Lengkap ⚠️", "Nama dan nomor WhatsApp wajib diisi agar divisi hubungan komunitas kami dapat menghubungi Anda.", "error");
+                return;
+            }
+
+            confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+            confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+
+            showToast(
+                "Pendaftaran Relawan Berhasil! 🙌",
+                `Selamat bergabung, Kak ${name}! Tim KPPL Tangsel akan segera mengirimkan tautan grup koordinasi ke nomor ${wa} via WhatsApp.`
+            );
+
+            // Reset inputs
+            document.getElementById('vol-name').value = '';
+            document.getElementById('vol-whatsapp').value = '';
+            document.getElementById('vol-reason').value = '';
+        }
+
+        // Newsletter subscription handler
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = document.getElementById('news-email').value;
+            showToast(
+                "Terima Kasih! 📧",
+                `Kami akan mengirimkan update aksi penanaman mangrove terkini ke email ${email}.`
+            );
+            document.getElementById('news-email').value = '';
+        }
+
+        // FAQ Toggle Logic
+        function toggleFAQ(index) {
+            const content = document.getElementById(`faq-content-${index}`);
+            const chevron = document.getElementById(`faq-chevron-${index}`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
